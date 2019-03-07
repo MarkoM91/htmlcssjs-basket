@@ -54,6 +54,18 @@ function isPresent(player, players) {
   return  finded;
 }
 
+function getPlayerbyId(id, players){
+
+var player;
+   for (var i = 0; i < players.length; i++) {
+     if (players[i].id == id) {
+      player = players[i];
+     }
+   }
+return player;
+
+}
+
 function getRandomPlayers() {
   var players = [];
 
@@ -81,7 +93,7 @@ function updateUI(players) {
     datalist.append(option);
 
   }
-  
+
   return datalist;
 }
 
@@ -94,7 +106,26 @@ function playerSelection() {
  var me = $(this);
  var pickedId = me.val();
 
+ var player = getPlayerbyId(pickedId, players)
+
+ idDOM =$('#id');
+ idPoints = $('#points');
+ idBounce = $('#bounce');
+ idMistake = $('#mistake');
+ idTwoPerc = $('#twoPerc');
+ idThreePerc = $('#threePerc');
+
+ idDOM.text(player.id);
+ idPoints.text(player.points);
+ idBounce.text(player.bounce);
+ idMistake.text(player.mistake);
+ idTwoPerc.text(player.twoPerc);
+ idThreePerc.text(player.threePerc);
 }
+
+
+
+
 
 function init() {
 
