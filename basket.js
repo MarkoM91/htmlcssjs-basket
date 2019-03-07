@@ -79,9 +79,11 @@ function updateUI(players) {
     var option =document.createElement("option");
     option.value = player.id;
 
-    var datalist = $('datalist.players-list');
+    var datalist = $('datalist#players-list');
     datalist.append(option);
+
   }
+  console.log(datalist);
   return datalist;
 }
 
@@ -92,7 +94,7 @@ console.log("ok");
 getRandomChar();
 getRandomId();
 getRandomPlayers();
-updateUI(players);
+updateUI(getRandomPlayers);
 }
 
 
