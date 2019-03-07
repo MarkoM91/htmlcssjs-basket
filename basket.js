@@ -19,7 +19,7 @@ function getRandomId() {
 
   rndId += getRandomChar() + getRandom(0, 9);
   }
-console.log(rndId);
+return rndId
 }
 
 
@@ -61,9 +61,7 @@ function getRandomPlayers() {
      var player = getRandomPlayer();
     if (!isPresent(player, players)) {
 
-        players.push(getRandomPlayer());
-    } else {
-      i--
+        players.push(player);
     }
 
   }
@@ -79,22 +77,36 @@ function updateUI(players) {
     var option =document.createElement("option");
     option.value = player.id;
 
-    var datalist = $('datalist#players-list');
+    var datalist = $('#players-list');
     datalist.append(option);
 
   }
-  console.log(datalist);
+  
   return datalist;
 }
 
+function clearClick() {
+  var input = $('#input');
+  input.val("");
+}
 
+function playerSelection() {
+ var me = $(this);
+ var pickedId = me.val();
+
+}
 
 function init() {
-console.log("ok");
+
 getRandomChar();
 getRandomId();
-getRandomPlayers();
-updateUI(getRandomPlayers);
+var players = getRandomPlayers();
+updateUI(players);
+var clearButton = $('#button');
+clearButton.click(clearClick);
+
+var input = $('#input');
+input.on("change" , playerSelection);
 }
 
 
