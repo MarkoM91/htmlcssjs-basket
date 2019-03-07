@@ -17,7 +17,7 @@ function getRandomId() {
 
   for (var i = 0; i < 3; i++) {
 
-  rndId += getRandomChar() + getRandom(0,9);
+  rndId += getRandomChar() + getRandom(0, 9);
   }
 console.log(rndId);
 }
@@ -38,7 +38,7 @@ function getRandomPlayer() {
   "threePerc" : threePerc
 };
 
-
+return player;
 }
 
 function isPresent(player, players) {
@@ -62,12 +62,27 @@ function getRandomPlayers() {
     if (!isPresent(player, players)) {
 
         players.push(getRandomPlayer());
+    } else {
+      i--
     }
+
   }
   return players;
 }
 
+function updateUI(players) {
 
+  for (var i = 0; i < players.length; i++) {
+
+    var player = players[i];
+
+    var option =document.createElement("option");
+    option.value = player.id;
+
+    var datalist = $('.players.list');
+    datalist.append(option);
+  }
+}
 
 
 
