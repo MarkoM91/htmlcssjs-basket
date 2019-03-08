@@ -27,7 +27,7 @@ return rndId
 function getRandomPlayer() {
 
   var twoPerc = getRandom(0, 100);
-  var threePerc = 100 - twoPerc -50;
+  var threePerc = 70 - twoPerc;
   var player = {
 
   "id" : getRandomId(),
@@ -36,7 +36,7 @@ function getRandomPlayer() {
   "mistake" :getRandom(0, 5),
   "twoPerc" : twoPerc,
   "threePerc" : threePerc
-};
+}
 
 return player;
 }
@@ -47,7 +47,7 @@ function isPresent(player, players) {
 
   for (var i = 0; i < players.length; i++) {
 
-    if (player.id == players[i].id) {
+    if (player.id == id) {
       finded = true;
     }
   }
@@ -71,49 +71,67 @@ function getRandomPlayers() {
 
   for (var i = 0; i < 10; i++) {
      var player = getRandomPlayer();
-    if (!isPresent(player, players)) {
+    if (!isPresent(player.id, players)) {
 
         players.push(player);
     }
 
   }
+
   return players;
 }
 
 function updateUI(players) {
 
+var datalist = $('#players');
+
+
   for (var i = 0; i < players.length; i++) {
 
-    var player = players[i];
 
-    var option =document.createElement("option");
-    option.value = player.id;
 
-    var datalist = $('#players-list');
+    option =document.createElement("option");
+    option.value = players[i].id;
+
+
     datalist.append(option);
 
   }
 
-  return datalist;
+
 }
 
 function clearClick() {
-  var input = $('#input');
+  var input = $('#usr-input');
   input.val("");
+
+  idDOM =$('#id');
+  idPoints = $('#points > span.content');
+  idBounce = $('#bounce > span.content');
+  idMistake = $('#mistake > span.content');
+  idTwoPerc = $('#twoPerc > span.content');
+  idThreePerc = $('#threePerc > span.content');
+
+  idDOM.text(player.id);
+  idPoints.text(player.points);
+  idBounce.text(player.bounce);
+  idMistake.text(player.mistake);
+  idTwoPerc.text(player.twoPerc);
+  idThreePerc.text(player.threePerc);
 }
 
-function playerSelection() {
- var me = $(this);
+function playerSelection(players, me) {
+
  var pickedId = me.val();
 
  var player = getPlayerbyId(pickedId, players)
 
- idDOM =$('#id');
- idPoints = $('#points');
- idBounce = $('#bounce');
- idMistake = $('#mistake');
- idTwoPerc = $('#twoPerc');
- idThreePerc = $('#threePerc');
+ idDOM =$('#id > span.content');
+ idPoints = $('#points > span.content');
+ idBounce = $('#bounce > span.content');
+ idMistake = $('#mistake > span.content');
+ idTwoPerc = $('#twoPerc > span.content');
+ idThreePerc = $('#threePerc > span.content');
 
  idDOM.text(player.id);
  idPoints.text(player.points);
@@ -130,14 +148,20 @@ function playerSelection() {
 function init() {
 
 getRandomChar();
-getRandomId();
+var res = getRandomPlayers();
+console.log(res);
 var players = getRandomPlayers();
 updateUI(players);
-var clearButton = $('#button');
+var clearButton = $('#clear-btn');
 clearButton.click(clearClick);
 
-var input = $('#input');
-input.on("change" , playerSelection);
+var input = $('#usr-input');
+input.on("change" , function() {
+console.log (players);
+var me = $(this);
+  playerSelection(players, me);
+
+});
 }
 
 
