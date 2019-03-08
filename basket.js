@@ -27,7 +27,7 @@ return rndId
 function getRandomPlayer() {
 
   var twoPerc = getRandom(0, 100);
-  var threePerc = 70 - twoPerc;
+  var threePerc = 100 - twoPerc;
   var player = {
 
   "id" : getRandomId(),
@@ -157,7 +157,7 @@ clearButton.click(clearClick);
 
 var input = $('#usr-input');
 input.on("change" , function() {
-console.log (players);
+
 var me = $(this);
   playerSelection(players, me);
 
