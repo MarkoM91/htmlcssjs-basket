@@ -13,13 +13,14 @@ function getRandomChar() {
 }
 
 function getRandomId() {
-  var rndId = "";
-
-  for (var i = 0; i < 3; i++) {
-
-  rndId += getRandomChar() + getRandom(0, 9);
-  }
-return rndId
+var rndChar = "";
+var rndVal = "";
+for (var i = 0; i < 3; i++) {
+  rndChar += getRandomChar();
+  rndVal += getRandom(0,9)
+}
+var rndId = rndChar + rndVal;
+return rndId;
 }
 
 
@@ -124,7 +125,7 @@ function playerSelection(players, me) {
 
  var pickedId = me.val();
 
- var player = getPlayerbyId(pickedId, players)
+ var player = getPlayerbyId(pickedId, players);
 
  idDOM =$('#id > span.content');
  idPoints = $('#points > span.content');
