@@ -13,14 +13,20 @@ function getRandomChar() {
 }
 
 function getRandomId() {
-var rndChar = "";
-var rndVal = "";
-for (var i = 0; i < 3; i++) {
-  rndChar += getRandomChar();
-  rndVal += getRandom(0,9)
-}
-var rndId = rndChar + rndVal;
-return rndId;
+
+  var rndChar = "";
+
+  var rndVal = "";
+
+  for (var i = 0; i < 3; i++) {
+
+    rndChar += getRandomChar();
+    rndVal += getRandom(0,9)
+  }
+
+  var rndId = rndChar + rndVal;
+
+  return rndId;
 }
 
 
@@ -28,7 +34,9 @@ return rndId;
 function getRandomPlayer() {
 
   var twoPerc = getRandom(0, 100);
+
   var threePerc = 100 - twoPerc;
+
   var player = {
 
   "id" : getRandomId(),
@@ -37,8 +45,7 @@ function getRandomPlayer() {
   "mistake" :getRandom(0, 5),
   "twoPerc" : twoPerc,
   "threePerc" : threePerc
-}
-
+   }
 return player;
 }
 
@@ -49,6 +56,7 @@ function isPresent(player, players) {
   for (var i = 0; i < players.length; i++) {
 
     if (player.id == id) {
+
       finded = true;
     }
   }
@@ -58,88 +66,85 @@ function isPresent(player, players) {
 function getPlayerbyId(id, players){
 
 var player;
+
    for (var i = 0; i < players.length; i++) {
+
      if (players[i].id == id) {
+
       player = players[i];
      }
    }
 return player;
-
 }
 
 function getRandomPlayers() {
+
   var players = [];
 
   for (var i = 0; i < 10; i++) {
+
      var player = getRandomPlayer();
-    if (!isPresent(player.id, players)) {
+
+     if (!isPresent(player.id, players)) {
 
         players.push(player);
-    }
-
+     }
   }
-
   return players;
 }
 
 function updateUI(players) {
 
-var datalist = $('#players');
-
+  var datalist = $('#players');
 
   for (var i = 0; i < players.length; i++) {
 
+     option =document.createElement("option");
+     option.value = players[i].id;
 
-
-    option =document.createElement("option");
-    option.value = players[i].id;
-
-
-    datalist.append(option);
-
+     datalist.append(option);
   }
-
-
 }
 
 function clearClick() {
-  var input = $('#usr-input');
-  input.val("");
 
-  idDOM =$('#id');
-  idPoints = $('#points > span.content');
-  idBounce = $('#bounce > span.content');
-  idMistake = $('#mistake > span.content');
-  idTwoPerc = $('#twoPerc > span.content');
-  idThreePerc = $('#threePerc > span.content');
+   var input = $('#usr-input');
+   input.val("");
 
-  idDOM.text(player.id);
-  idPoints.text(player.points);
-  idBounce.text(player.bounce);
-  idMistake.text(player.mistake);
-  idTwoPerc.text(player.twoPerc);
-  idThreePerc.text(player.threePerc);
+   idDOM =$('#id');
+   idPoints = $('#points > span.content');
+   idBounce = $('#bounce > span.content');
+   idMistake = $('#mistake > span.content');
+   idTwoPerc = $('#twoPerc > span.content');
+   idThreePerc = $('#threePerc > span.content');
+
+   idDOM.text(player.id);
+   idPoints.text(player.points);
+   idBounce.text(player.bounce);
+   idMistake.text(player.mistake);
+   idTwoPerc.text(player.twoPerc);
+   idThreePerc.text(player.threePerc);
 }
 
 function playerSelection(players, me) {
 
- var pickedId = me.val();
+   var pickedId = me.val();
 
- var player = getPlayerbyId(pickedId, players);
+   var player = getPlayerbyId(pickedId, players);
 
- idDOM =$('#id > span.content');
- idPoints = $('#points > span.content');
- idBounce = $('#bounce > span.content');
- idMistake = $('#mistake > span.content');
- idTwoPerc = $('#twoPerc > span.content');
- idThreePerc = $('#threePerc > span.content');
+   idDOM =$('#id > span.content');
+   idPoints = $('#points > span.content');
+   idBounce = $('#bounce > span.content');
+   idMistake = $('#mistake > span.content');
+   idTwoPerc = $('#twoPerc > span.content');
+   idThreePerc = $('#threePerc > span.content');
 
- idDOM.text(player.id);
- idPoints.text(player.points);
- idBounce.text(player.bounce);
- idMistake.text(player.mistake);
- idTwoPerc.text(player.twoPerc);
- idThreePerc.text(player.threePerc);
+   idDOM.text(player.id);
+   idPoints.text(player.points);
+   idBounce.text(player.bounce);
+   idMistake.text(player.mistake);
+   idTwoPerc.text(player.twoPerc);
+   idThreePerc.text(player.threePerc);
 }
 
 
@@ -148,21 +153,22 @@ function playerSelection(players, me) {
 
 function init() {
 
-getRandomChar();
-var res = getRandomPlayers();
-console.log(res);
-var players = getRandomPlayers();
-updateUI(players);
-var clearButton = $('#clear-btn');
-clearButton.click(clearClick);
+  getRandomChar();
+  var res = getRandomPlayers();
+  console.log(res);
 
-var input = $('#usr-input');
-input.on("change" , function() {
+  var players = getRandomPlayers();
+  updateUI(players);
 
-var me = $(this);
-  playerSelection(players, me);
+  var clearButton = $('#clear-btn');
+  clearButton.click(clearClick);
 
-});
+  var input = $('#usr-input');
+  input.on("change" , function() {
+
+    var me = $(this);
+    playerSelection(players, me);
+  });
 }
 
 
